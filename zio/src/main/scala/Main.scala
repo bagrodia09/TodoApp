@@ -18,7 +18,7 @@ object Main extends ZIOAppDefault {
       QuillContext.dataSourceLayer,
       configuration.live,
       TodoService.live,
-      MigrationService.layer,
+      // MigrationService.layer,// this layer can and should be removed because it depends on DataSource Layer which is already provided by  QuillContext.dataSourceLayer
     )
 
   /** override def run1 = ZIO .serviceWithZIO[TodoAppServer]( _.startServer ) //
