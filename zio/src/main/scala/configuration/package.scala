@@ -1,15 +1,12 @@
-package configurations
-
 import zio.TaskLayer
-import zio.config.ConfigDescriptor._
+
 import zio.config.magnolia.descriptor
-import zio.config.syntax._
 import zio.config.typesafe.TypesafeConfig
-final case class AppConfig(flyway: FlywayConfig)
+import zio.config.ConfigDescriptor._
+import zio.config.syntax._
 
-object AppConfig {
-
-  private type AllConfig = AppConfig with FlywayConfig
+package object configuration {
+  private type AllConfig = AppConfig with FlywayConfig with ServerConfig
 
   private final val Root = "todo"
 
@@ -19,6 +16,6 @@ object AppConfig {
 
   val live: TaskLayer[AllConfig] =
     appConfig >+>
-      appConfig.narrow(_.flyway)
+      appConfig.narrow(_.flyway) >+> appConfig.narrow(_.server)
 
 }
