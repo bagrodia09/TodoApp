@@ -1,0 +1,5 @@
+package route
+
+object Main {
+  
+}
